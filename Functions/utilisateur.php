@@ -24,13 +24,12 @@ function ajouter_utilisateur($con, $nom, $prenom, $email, $telephone, $username,
     $sql_ajouter = "INSERT INTO Utilisateur(`nom`, `prenom`, `email`, `telephone`, `username`, `password`, `administrateur`) 
                     VALUES ('".$nom."', '".$prenom."', '".$email."', '".$telephone."', '".$username."', '".$password."', '".$administrateur."'";
 
-    if (mysqli_query($con, $sql_ajouter))
-        return "Added.";
-    else
-        return "Can't add user.";
-
+    $info = mysqli_query($con, $sql_ajouter);
+    
 
     mysqli_close($con);
+
+    return $info;
 }
 
 function modifier_utilisateur($con, $id, $nom, $prenom, $email, $telephone, $username, $password) {
@@ -38,24 +37,26 @@ function modifier_utilisateur($con, $id, $nom, $prenom, $email, $telephone, $use
     $sql_update = "UPDATE Utilisateur
                    SET nom = '".$nom."' , prenom = '".$prenom."' , email = '".$email."', telephone = '".$telephone."' 
                    , username = '".$username."' , password = '".$password."'
-                   WHERE id = '".$id."'";
+                   WHERE id = ".$id;
 
-    if (mysqli_query($con, $sql_update))
-        return "Votre modification a été enregistrée avec succès.";
-    else
-        return "Nous ne pouvons pas enregistrer votre modification.";
+    $info = mysqli_query($con, $sql_update);
+
+    mysqli_close($con);
+
+    return $info;
 
 }
 
 function supprimer_utilisateur($con, $id) {
 
     $sql_delete = "DELETE Utilisateur 
-                   WHERE id = '".$id."'";
+                   WHERE id = ".$id;
 
-    if (mysqli_query($con, $id))
-        return "Le compte a été supprimé avec succès";
-    else
-        return "Impossible de supprimer ce compte";
+    $info = mysqli_query($con, $sql_delete);
+
+    mysqli_close($con);
+
+    return $info;
 
 }
 
