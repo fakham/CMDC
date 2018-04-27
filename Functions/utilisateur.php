@@ -2,7 +2,7 @@
 
 include 'connect.php';
 
-function ajouter_utilisateur($con, $nom, $prenom, $email, $telephone, $username, $password) {
+function ajouter_utilisateur($con, $nom, $prenom, $email, $telephone, $username, $password, $administrateur) {
 
     // check if user already exists
     $sql_check_username = "SELECT * FROM Utilisateur WHERE username = '".$username."'";
@@ -21,8 +21,8 @@ function ajouter_utilisateur($con, $nom, $prenom, $email, $telephone, $username,
         return "Email existe déjà.";
 
     // adding user
-    $sql_ajouter = "INSERT INTO Utilisateur(`nom`, `prenom`, `email`, `telephone`, `username`, `password`) 
-                    VALUES ('".$nom."', '".$prenom."', '".$email."', '".$telephone."', '".$username."', '".$password."')";
+    $sql_ajouter = "INSERT INTO Utilisateur(`nom`, `prenom`, `email`, `telephone`, `username`, `password`, `administrateur`) 
+                    VALUES ('".$nom."', '".$prenom."', '".$email."', '".$telephone."', '".$username."', '".$password."', '".$administrateur."'";
 
     if (mysqli_query($con, $sql_ajouter))
         return "Added.";
