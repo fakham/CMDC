@@ -33,12 +33,12 @@ function ajouter_utilisateur($con, $nom, $prenom, $email, $telephone, $username,
     mysqli_close($con);
 }
 
-function modifier_utilisateur($con, $nom, $prenom, $email, $telephone, $username, $password) {
+function modifier_utilisateur($con, $id, $nom, $prenom, $email, $telephone, $username, $password) {
     
     $sql_update = "UPDATE Utilisateur
-                   SET nom = '".$nom."' , prenom = '".$prenom."' , telephone = '".$telephone."' 
+                   SET nom = '".$nom."' , prenom = '".$prenom."' , email = '".$email."', telephone = '".$telephone."' 
                    , username = '".$username."' , password = '".$password."'
-                   WHERE email = '".$email."'";
+                   WHERE id = '".$id."'";
 
     if (mysqli_query($con, $sql_update))
         return "Votre modification a été enregistrée avec succès.";
@@ -47,12 +47,12 @@ function modifier_utilisateur($con, $nom, $prenom, $email, $telephone, $username
 
 }
 
-function supprimer_utilisateur($con, $email) {
+function supprimer_utilisateur($con, $id) {
 
     $sql_delete = "DELETE Utilisateur 
-                   WHERE email = '".$email."'";
+                   WHERE id = '".$id."'";
 
-    if (mysqli_query($con, $email))
+    if (mysqli_query($con, $id))
         return "Le compte a été supprimé avec succès";
     else
         return "Impossible de supprimer ce compte";
